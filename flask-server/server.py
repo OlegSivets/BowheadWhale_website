@@ -3,11 +3,10 @@ from flask import Flask
 app = Flask(__name__)
 
 
-@app.route('/')
+@app.route('/data')
 def data():
     return {
-        'k1': 'whale',
-        'k2': 'greenland'
+        "elems": ['data1', 'data2']
     }
 
 
