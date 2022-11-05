@@ -10,7 +10,7 @@ body {
 
 .header {
   text-align: left;
-  background-color: #282c34;
+  background-color: #0f295f;
   color: white;
   font-size: 1.5em;
   padding: 1em;
@@ -28,7 +28,7 @@ body {
 
 .drop-block{
   width: 100%;
-  border-bottom: 5px solid #282c34;
+  border-bottom: 5px dashed #282c34;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -37,7 +37,8 @@ body {
 .drop-area{
   height: 20vh;
   width: 100%;
-  border-radius: 1em;
+  color: aliceblue;
+  background-color: #8b8d92;
   display: flex;
   font-size: 1.5em;
   align-items: center;
@@ -46,7 +47,7 @@ body {
 
 .upload-section{
   margin-top: 0.5em;
-  border-bottom: 5px solid #282c34;
+  border-bottom: 5px dashed #282c34;
   display: flex;
   justify-content: space-between;
   padding: 1em;
@@ -59,6 +60,7 @@ body {
 
 /* UPLOADED FILES SECTION */
 .uploaded-files-area{
+  height: 100%;
   padding: 1em;
   display: grid;
   grid-template-columns: repeat(9, 1fr);
