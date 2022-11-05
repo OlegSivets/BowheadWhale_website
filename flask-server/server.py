@@ -1,7 +1,14 @@
-from flask import Flask, request, make_response, jsonify
+from flask import *
+import os
+import matplotlib.pyplot as plt
+
+UPLOAD_FOLDER = '/path/to/the/uploads'
+ALLOWED_EXTENSIONS = set(['jp2', 'raw', 'png', 'jpg', 'jpeg', 'zip'])
 
 app = Flask(__name__)
 
+UPLOAD_FOLDER = '/uploaded'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route('/data')
 def data():
@@ -14,10 +21,15 @@ def data():
 def getClientFiles():
     getData = request.files
     for i in range(len(getData)):
-        print(getData[f'file_{i}'])
+        f = getData[f'file_{i}']
+        f.save('./uploaded/' + f.filename)
+        #return redirect(url_for('uploaded_file', filename=filee.filename))
     res = make_response(jsonify({"message": "files were received"}), 200)
     return res
 
+# @app.route('/result', methods=['POST'])
+# def showResultFiles():
+#     plt.imshow()
 
 if __name__ == '__main__':
     app.run(debug=True)
