@@ -14,7 +14,7 @@ export default function UploadedFilesAres() {
         <ImageItem file={file} key={i}/>   
        )) :
       // <div>somethong to show</div> :  
-      <div>nothing to show</div>
+      <div>Загрузите фото</div>
     }
     </div>
   )

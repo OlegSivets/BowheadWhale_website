@@ -9,13 +9,15 @@ const MainContextProvider = ({children}) => {
 
     const uploadNewFiles = (files) =>{
       files = files.filter(elem => permittedTypes.includes(elem['type']))
-      console.log('uploaded files: ', files)
+      console.log('already uploaded: ', uploadedFiles)
       
       if (uploadedFiles.length > 0) {
+        let tempFiles = []
         for (let i = 0; i < files.length; i++){
-          (!uploadedFiles.find(elem => elem['name'] === files[i]['name'])
-            && setUploadedFiles([...uploadedFiles, files[i]]))
+          (!uploadedFiles.find(elem => elem['name'] === files[i]['name']) && 
+            tempFiles.push(files[i]))
         }
+        setUploadedFiles([...uploadedFiles, ...tempFiles])
       } else {
         setUploadedFiles(files)
       }
