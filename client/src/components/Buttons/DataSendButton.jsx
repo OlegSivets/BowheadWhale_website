@@ -4,14 +4,10 @@ import { MainContext } from '../../contex/MainContext'
 
 
 export default function DataSendButton() {
-  const {uploadedFiles, sendFilesData} = useContext(MainContext)
+  const {sendFilesData} = useContext(MainContext)
 
   function handleButtonClick(){
-    if (uploadedFiles){
-        sendFilesData(uploadedFiles)
-    } else {
-        console.log('no files were selected')
-    }
+    sendFilesData()
   }
 
   return (

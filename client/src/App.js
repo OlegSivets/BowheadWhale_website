@@ -6,6 +6,7 @@ import './App.css';
 import DataSendButton from './components/Buttons/DataSendButton';
 import HeaderArea from './components/Areas/HeaderArea';
 import UploadedFilesAres from './components/Areas/UploadedFilesAres';
+import UploadLabelArea from './components/Areas/UploadLabelArea';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <DataSendButton />
       </section>
       <DragArea />
+      <UploadLabelArea />
       <UploadedFilesAres />
     </MainContextProvider>
   );

@@ -1,16 +1,20 @@
 import { createContext } from "react"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { permittedTypes } from '../constants/constants'
 
 export const MainContext = createContext()
 
 const MainContextProvider = ({children}) => {
     const [uploadedFiles, setUploadedFiles] = useState([])
+    const [updateStatus, setUpdateStatus] = useState(true)
+
+    useEffect(() => {
+      console.log('UPDATE:', updateStatus)
+    }, [updateStatus])
 
     const uploadNewFiles = (files) =>{
       files = files.filter(elem => permittedTypes.includes(elem['type']))
-      console.log('already uploaded: ', uploadedFiles)
-      
+
       if (uploadedFiles.length > 0) {
         let tempFiles = []
         for (let i = 0; i < files.length; i++){
@@ -27,34 +31,40 @@ const MainContextProvider = ({children}) => {
       setUploadedFiles(uploadedFiles.filter(elem => elem['name'] != file['name']))
     }
 
-    const sendFilesData = (data) => {
-        console.log('DATA: ', data)
+    const sendFilesData = async () => {
+        console.log('DATA: ', uploadedFiles)
+        setUpdateStatus(false)
 
-        const formData = new FormData();
-        for (let i = 0; i < data.length; i++) {
-          formData.append('file_' + i, data[i]);
-        }
+        if (uploadedFiles.length == 0) {
+          console.log('NO FILES WERE SELECTED')
+        } else {
+          const formData = new FormData();
+          for (let i = 0; i < uploadedFiles.length; i++) {
+            formData.append('file_' + i, uploadedFiles[i]);
+          }
     
-        const options = {
-          method: 'POST',
-          body: formData,
-        };
-
-        // TODO: handle data fetch
-        fetch('/files', options).then(Request =>
-          Request.json().then(req => {
-            console.log(req)
-            // create files array
-            // setUploadedFiles(files)
-            // download files
-          })
-        );
+          const options = {
+            method: 'POST',
+            body: formData,
+          };
+          const fileNames = await fetch('/files', options).then(Request => Request.json())
+          let promises = []
+          for (let i = 0; i < fileNames.length; i++) {
+            promises.push(await fetch('/' + fileNames[i]).then(res => res.blob().then(res =>
+              res = new File([res],  fileNames[i])
+            )))
+          }
+          uploadNewFiles(promises)
+          setUpdateStatus(true)
+        }
     }
+
     return (
         <MainContext.Provider value = {{
             uploadedFiles,
             setUploadedFiles,
-            setUploadedFiles,
+            updateStatus,
+            setUpdateStatus,
             sendFilesData,
             uploadNewFiles,
             removeUploadedFile,

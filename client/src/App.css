@@ -18,6 +18,13 @@ body {
 
 
 /* FILES UPLOAD SECTION */
+.upload-label{
+  width: 100%;
+  padding-top: 1em;
+  padding-left: 1em;
+  font-size: 20px;
+}
+
 .download-area{
   width: 50vw;
   margin: 1em auto 5em auto;
