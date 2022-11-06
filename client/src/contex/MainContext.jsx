@@ -54,7 +54,7 @@ const MainContextProvider = ({children}) => {
               res = new File([res],  fileNames[i])
             )))
           }
-          uploadNewFiles(promises)
+          setUploadedFiles(promises)
           setUpdateStatus(true)
         }
     }
