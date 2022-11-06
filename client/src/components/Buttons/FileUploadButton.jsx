@@ -6,7 +6,7 @@ export default function ButtonFileUpload() {
 
   function handleInputChange(e){
     uploadNewFiles(Object.values(e.target.files))
-    console.log('files were upload')
+    console.log('FILES WERE UPLOAD')
   }
 
   return (

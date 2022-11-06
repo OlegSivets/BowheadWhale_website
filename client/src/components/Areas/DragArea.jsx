@@ -14,10 +14,9 @@ export default function DragArea() {
     function onDropHandler(e) {
       e.preventDefault(e);
       let files = [...e.dataTransfer.files];
-      console.log(files);
       
       uploadNewFiles(files)
-      console.log('files were upload')
+      console.log('FILES WERE UPLOAD')
     }
 
     return (
