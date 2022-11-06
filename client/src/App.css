@@ -1,48 +1,116 @@
-.App {
+body {
+  margin: 0;
+}
+
+.content-area{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header {
+  text-align: left;
+  background-color: #0f295f;
+  color: white;
+  font-size: 1.5em;
+  padding: 1em;
+}
+
+
+/* FILES UPLOAD SECTION */
+.download-area{
+  width: 50vw;
+  margin: 1em auto 5em auto;
+  border: 5px solid rgb(53, 51, 51);
+  display: grid;
+
+}
+
+.drop-block{
+  width: 100%;
+  border-bottom: 5px dashed #282c34;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.drop-area{
+  height: 20vh;
+  width: 100%;
+  color: aliceblue;
+  background-color: #8b8d92;
+  display: flex;
+  font-size: 1.5em;
+  align-items: center;
+  justify-content: center;
+}
+
+.upload-section{
+  margin-top: 0.5em;
+  border-bottom: 5px dashed #282c34;
+  display: flex;
+  justify-content: space-between;
+  padding: 1em;
+}
+
+.data-send-button{
+  width: 14em;
+  height: 2em;
+}
+
+/* UPLOADED FILES SECTION */
+.uploaded-files-area{
+  height: 100%;
+  padding: 1em;
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  align-items: center;
+}
+
+.text-box{
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.image-box{
+  margin: 0.5em;
+  border: 4px solid #282c34;
+  border-radius: 3px;
+  width: 8em;
+  height: 8em;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.image-box img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-
-.drop-area{
-  width: 50vw;
-  height: 50vh;
-  border: 5px dashed black;
+.close {
+  position: absolute;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 32px;
+  height: 32px;
+  opacity: 0.3;
+}
+.close:hover {
+  opacity: 1;
+}
+.close:before, .close:after {
+  position: absolute;
+  content: ' ';
+  height: 33px;
+  width: 2px;
+  background-color: #333;
+}
+.close:before {
+  transform: rotate(45deg);
+}
+.close:after {
+  transform: rotate(-45deg);
 }

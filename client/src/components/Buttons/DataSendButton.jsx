@@ -12,12 +12,9 @@ export default function DataSendButton() {
     } else {
         console.log('no files were selected')
     }
-
   }
 
   return (
-    <div>
-        <button onClick={handleButtonClick}>Загрузить файлы</button>
-    </div>
+    <button className='data-send-button' onClick={handleButtonClick}>Обработать файлы</button>
   )
 }
