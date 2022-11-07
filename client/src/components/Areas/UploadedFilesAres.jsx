@@ -10,23 +10,11 @@ export default function UploadedFilesAres() {
   console.log('CURRENT_FILES: ', uploadedFiles)
 
   return (
-    <div className='uploaded-files-area'>
-      
+    <div className='uploaded-files-area'>     
         {uploadedFiles.length > 0 &&
         uploadedFiles.map((file, i) => (
           <ImageItem file={file} key={i}/>   
          ))}
-
-       
     </div>
   )
 }
-
-
-//   {uploadedFiles.length > 0 ? 
-    //   uploadedFiles.map((file, i) => (
-    //     <ImageItem file={file} key={i}/>   
-    //    )) :
-    //   // <div>somethong to show</div> :  
-    //   <div>Загрузите фото</div>
-    // }

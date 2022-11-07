@@ -64,6 +64,12 @@ body {
   height: 2em;
 }
 
+.download-data-button{
+  width: 14em;
+  height: 2em;
+  margin-right: 1em;
+}
+
 /* UPLOADED FILES SECTION */
 .uploaded-files-area{
   height: 100%;
