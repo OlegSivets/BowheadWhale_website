@@ -7,6 +7,7 @@ import DataSendButton from './components/Buttons/DataSendButton';
 import HeaderArea from './components/Areas/HeaderArea';
 import UploadedFilesAres from './components/Areas/UploadedFilesAres';
 import UploadLabelArea from './components/Areas/UploadLabelArea';
+import DownloadButton from './components/Buttons/DownloadButton';
 
 function App() {
   return (
@@ -14,7 +15,10 @@ function App() {
       <HeaderArea />
       <section className='upload-section'>
         <ButtonFileUpload />
-        <DataSendButton />
+        <div>
+          <DownloadButton />
+          <DataSendButton />
+        </div>
       </section>
       <DragArea />
       <UploadLabelArea />

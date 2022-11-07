@@ -2,13 +2,16 @@ import React, { useContext } from 'react'
 import { MainContext } from '../../contex/MainContext'
 
 export default function ImageDeleteButton({file}) {
-  const {removeUploadedFile} = useContext(MainContext)
+  const {removeUploadedFile, resultState} = useContext(MainContext)
 
   function handleButtonClick() {
     removeUploadedFile(file)
   }
 
   return (
-    <button onClick={handleButtonClick} className='close'></button>
+    <div>
+      {resultState ? <></>:
+        <button onClick={handleButtonClick} className='close'></button>}
+    </div> 
   )
 }
