@@ -5,8 +5,8 @@ from werkzeug.utils import secure_filename
 from flask import Flask, request, make_response, jsonify, send_file
 
 
-UPLOAD_FOLDER = './uploaded'
-RESULT_FOLDER = './result'
+UPLOAD_FOLDER = 'uploaded'
+RESULT_FOLDER = 'result'
 ALLOWED_EXTENSIONS = set(['jp2', 'raw', 'png', 'jpg', 'jpeg', 'zip', 'rar', 'gz', '7z'])
 
 app = Flask(__name__)
@@ -52,6 +52,10 @@ def get_client_files():
     res = make_response(jsonify(os.listdir(app.config['RESULT_FOLDER'])), 200)
     return res
 
+@app.route('/q')
+def result1_images():
+    """Возврат обработанных изображений клиенту"""
+    return "<h1>Hello, World!<h1>" 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0')
