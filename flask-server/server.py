@@ -49,7 +49,7 @@ def get_client_files():
                 patoolib.extract_archive(path, outdir=app.config['UPLOAD_FOLDER'])
                 os.remove(path)
     process()
-    res = make_response(jsonify(os.listdir(app.config['RESULT_FOLDER'])), 200)
+    res = make_response(jsonify(os.listdir(app.config['RESULT_FOLDER'])[1:]), 200)
     return res
 
 
