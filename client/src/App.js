@@ -1,28 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import DragArea from './components/Areas/DragArea';
-import ButtonFileUpload from './components/Buttons/FileUploadButton';
-import MainContextProvider from './contex/MainContext';
 import './App.css';
-import DataSendButton from './components/Buttons/DataSendButton';
-import HeaderArea from './components/Areas/HeaderArea';
-import UploadedFilesAres from './components/Areas/UploadedFilesAres';
+import DragArea from './components/Areas/DragArea';
+import FilesUploadButton from './components/Buttons/FilesUploadButton';
+import MainContextProvider from './contex/MainContext';
+import HeaderArea from './components/Areas/header/HeaderArea';
+import UploadedFilesArea from './components/Areas/UploadedFilesArea';
 import UploadLabelArea from './components/Areas/UploadLabelArea';
 import DownloadButton from './components/Buttons/DownloadButton';
+import FilesDeleteButton from './components/Buttons/FilesDeleteButton';
+import UploadManageArea from './components/Areas/UploadManageArea';
 
 function App() {
   return (
     <MainContextProvider>
       <HeaderArea />
-      <section className='upload-section'>
-        <ButtonFileUpload />
-        <div>
-          <DownloadButton />
-          <DataSendButton />
-        </div>
-      </section>
+      <UploadManageArea />
       <DragArea />
       <UploadLabelArea />
-      <UploadedFilesAres />
+      <UploadedFilesArea />
     </MainContextProvider>
   );
 }

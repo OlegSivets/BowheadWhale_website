@@ -11,6 +11,6 @@ export default function DataSendButton() {
   }
 
   return (
-    <button className='data-send-button' onClick={handleButtonClick}>Обработать файлы</button>
+    <button className='send-button' onClick={handleButtonClick}><span>Обработать файлы</span></button>
   )
 }

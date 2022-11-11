@@ -27,7 +27,9 @@ export default function DragArea() {
               onDragLeave={e => dragHandler(e, false)}
               onDragOver={e => dragHandler(e, true)}
               onDrop={e => onDropHandler(e)}>
-              Отпустите файлы, чтобы загрузить
+                <span>
+                Отпустите файлы, чтобы загрузить
+                </span>
             </div>
           ) : (
             <div

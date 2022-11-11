@@ -8,6 +8,7 @@ const MainContextProvider = ({children}) => {
     const [uploadedFiles, setUploadedFiles] = useState([])
     const [updateStatus, setUpdateStatus] = useState(true)
     const [resultState, setResultState] = useState(false)
+    const [filesVisibility, setFileVisibility] = useState(false)
 
     useEffect(() => {
       console.log('UPDATE:', updateStatus)
@@ -89,6 +90,8 @@ const MainContextProvider = ({children}) => {
             setUpdateStatus,
             resultState,
             setResultState,
+            filesVisibility,
+            setFileVisibility,
             sendFilesData,
             uploadNewFiles,
             removeUploadedFile,

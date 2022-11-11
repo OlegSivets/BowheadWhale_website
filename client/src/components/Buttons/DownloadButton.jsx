@@ -6,7 +6,7 @@ export default function DownloadButton() {
   const { downloadFiles, resultState } = useContext(MainContext)
 
   return (
-    <button className='download-data-button' 
-    onClick={downloadFiles} disabled={resultState ? "" : "disabled"}>Скачать файлы</button>
+    <button className='download-button' 
+    onClick={downloadFiles} disabled={resultState ? "" : "disabled"}><span>Скачать файлы</span></button>
   )
 }
