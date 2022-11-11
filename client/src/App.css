@@ -84,6 +84,10 @@ div[id='root']{
   padding: 0 1em 0 1em;
 }
 
+.upload-button label{
+  padding: 1em;
+  font-size: 18px;
+}
 
 /* BUTTONS */
 input[type="file"]{
@@ -104,19 +108,6 @@ input[type="file"]{
   align-items: center;
 }
 
-.upload-button {
-  border-radius: 4px;
-  background-color: #1e211f;
-  border: none;
-  color: #FFFFFF;
-  text-align: center;
-  font-size: 1em;
-  padding: 1em;
-  cursor: pointer;
-  margin-right: 1em;
-  transition: 0.5s;
-}
-
 .button span:before {
   content: '\003C';
   position: absolute;
@@ -126,7 +117,7 @@ input[type="file"]{
   transition: 0.5s;
 }
 
-.send-button, .download-button, .delete-button {
+.upload-button, .send-button, .download-button, .delete-button {
   border-radius: 4px;
   background-color: #1e211f;
   border: none;
@@ -135,7 +126,12 @@ input[type="file"]{
   font-size: 1em;
   padding: 1em;
   transition: all 0.5s;
-  cursor: pointer;
+}
+
+.upload-button {
+  padding: 1em 0 1em 0;
+  margin-right: 1em;
+  transition: 0.5s;
 }
 
 .send-button span {
@@ -199,8 +195,8 @@ input[type="file"]{
   margin: 1em 0 0 1em;
   color: white;
   font-size: 20px;
-  width: 17vw;
-  min-width: 190px;
+  width: 18.7vw;
+  min-width: 250px;
 }
 
 .uploaded-files-area{
