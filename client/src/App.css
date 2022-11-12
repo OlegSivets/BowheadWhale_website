@@ -388,6 +388,7 @@ input:checked + .slider:before {
 }
 
 table, th, td {
-  border:1px solid #1e211f;
+  border:1px solid black;
   color: black;
+  background-color: rgb(147, 147, 147);
 }
