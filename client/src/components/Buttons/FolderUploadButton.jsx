@@ -10,6 +10,7 @@ export default function FolderUploadButton() {
     uploadNewFiles(Object.values(e.target.files))
     console.log('FILES WERE UPLOAD')
   }
+  
   return (
     <div className='upload-button'>
       <label htmlFor="file-upload-directory">Выбрать папку</label>

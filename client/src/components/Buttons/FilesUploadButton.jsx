@@ -11,10 +11,10 @@ export default function FilesUploadButton() {
   }
 
   return (
-      <div className='upload-button'>
-        <label htmlFor="file-upload">Выбрать файлы</label>
-        <input id='file-upload' type='file' accept=".jpg, .jpeg, .png, .zip" multiple onChange={e => handleInputChange(e)} />
-      </div>
+    <div className='upload-button'>
+      <label htmlFor="file-upload">Выбрать файлы</label>
+      <input id='file-upload' type='file' accept=".jpg, .jpeg, .png" multiple onChange={e => handleInputChange(e)} />
+    </div>
   )
 }
 

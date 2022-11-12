@@ -27,9 +27,7 @@ export default function DragArea() {
               onDragLeave={e => dragHandler(e, false)}
               onDragOver={e => dragHandler(e, true)}
               onDrop={e => onDropHandler(e)}>
-                <span>
-                Отпустите файлы, чтобы загрузить
-                </span>
+              <span>Отпустите файлы, чтобы загрузить</span>
             </div>
           ) : (
             <div
@@ -37,7 +35,7 @@ export default function DragArea() {
               onDragStart={e => dragHandler(e, true)}
               onDragLeave={e => dragHandler(e, false)}
               onDragOver={e => dragHandler(e, true)}>
-              Перетащите файлы в область загрузки
+              <span>Перетащите файлы в область загрузки</span>
             </div>
           )}
           </div>

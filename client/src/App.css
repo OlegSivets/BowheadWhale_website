@@ -335,7 +335,7 @@ input:checked + .slider:before {
 }
 
 /* DATA MANAGE AREA */
-.data-mage-area {
+.data-manage-area {
   height: 50vh;
   margin-top: 3em;
   display: flex;

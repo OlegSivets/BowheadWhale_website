@@ -9,8 +9,6 @@ export default function ImageDeleteButton({file}) {
   }
 
   return (
-    <div>
-        <button onClick={handleButtonClick} className='close'></button>
-    </div> 
+    <button onClick={handleButtonClick} className='close'></button>
   )
 }
