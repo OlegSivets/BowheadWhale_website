@@ -10,9 +10,12 @@ export default function HideFilesSwitch() {
   }
 
   return (
-    <label className="switch">
-        <input type="checkbox" onClick={handleCheckboxClicked}/>
-        <span className="slider round"></span>
-    </label>
+    <div className='switch-area'>
+      <label className='switch-label'>Отображение файлов</label>
+      <label className="switch">
+          <input type="checkbox" onClick={handleCheckboxClicked}/>
+          <span className="slider round"></span>
+      </label>
+    </div>
   )
 }

@@ -9,6 +9,10 @@ div[id='root']{
   height: 100vh;
 }
 
+label{
+  text-align: center;
+}
+
 .content-area{
   display: flex;
   align-items: center;
@@ -41,6 +45,23 @@ div[id='root']{
 }
 
 
+/* FILES CONTROL SECTION */
+.files-control-area {
+  background-color: rgb(131, 126, 126);
+  min-width: 400px;
+  padding: 1em;
+  border: solid black;
+  border-radius: 7px;
+  width: 43vw;
+  height: 100%;
+  margin: 1em;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
 /* FILES UPLOAD SECTION */
 .download-area{
   width: 50vw;
@@ -51,7 +72,8 @@ div[id='root']{
 }
 
 .drop-block{
-  margin: 0 1em 0 1em;
+  width: 100%;
+  height: 20vh;
   opacity: 0.7;
   border: 5px dashed #294438;
   border-radius: 6px;
@@ -67,10 +89,10 @@ div[id='root']{
 }
 
 .drop-area{
-  height: 20vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   color: aliceblue;
-  background-color: #59665d;
+  background-color: #68816f;
   display: flex;
   font-size: 1.5em;
   align-items: center;
@@ -78,15 +100,15 @@ div[id='root']{
 }
 
 .upload-manage-section{
+  padding-bottom: 1em;
   display: flex;
+  width: 100%;
   justify-content: space-between;
   align-items: center;
-  padding: 0 1em 0 1em;
 }
 
 .upload-button label{
   padding: 1em;
-  font-size: 18px;
 }
 
 /* BUTTONS */
@@ -120,51 +142,22 @@ input[type="file"]{
 .upload-button, .send-button, .download-button, .delete-button {
   border-radius: 4px;
   background-color: #1e211f;
-  border: none;
+  border: 2px solid black;
   color: #FFFFFF;
   text-align: center;
-  font-size: 1em;
   padding: 1em;
   transition: all 0.5s;
+  font-size: 1em;
 }
 
 .upload-button {
   padding: 1em 0 1em 0;
-  margin-right: 1em;
-  transition: 0.5s;
-}
-
-.send-button span {
-  cursor: pointer;
-  display: inline-block;
-  position: relative;
-  transition: 0.5s;
-}
-
-.send-button span:after {
-  content: '\00bb';
-  position: absolute;
-  opacity: 0;
-  top: 0;
-  right: -20px;
   transition: 0.5s;
 }
 
 .send-button:hover, .download-button:hover, .upload-button:hover {
-  background-color: rgb(131, 126, 126);
-}
-
-.send-button:hover span {
-  padding-right: 25px;
-}
-
-.send-button:hover span:after {
-  opacity: 1;
-  right: 0;
-}
-
-.send-button{
-  margin-right: 1em;
+  background-color: #68816f;
+  transition: all 0.3s;
 }
 
 .delete-button:hover {
@@ -174,6 +167,7 @@ input[type="file"]{
 
 .download-button{
   margin-right: 1em;
+  margin-top: 1em;
 }
 
 .download-button:disabled{
@@ -187,16 +181,19 @@ input[type="file"]{
 /* UPLOADED FILES SECTION */
 .upload-control-area{
   background-color: #1e211f;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1em;
+  margin-top: 1em;
+  padding: 1em 0 1em 0;
   border-radius: 4px;
-  margin: 1em 0 0 1em;
   color: white;
   font-size: 20px;
-  width: 18.7vw;
-  min-width: 250px;
+}
+
+.upload-control-label{
+  padding-left: 1em;
 }
 
 .uploaded-files-area{
@@ -266,7 +263,18 @@ input[type="file"]{
 }
 
 
-/* SLIDER */
+/* SWITCH AREA */
+.switch-area {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 1em;
+}
+
+.switch-label {
+  padding-right: 1em;
+}
+
 .switch {
   position: relative;
   display: inline-block;
@@ -324,4 +332,61 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+/* DATA MANAGE AREA */
+.data-mage-area {
+  height: 50vh;
+  margin-top: 3em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* RESULT SECTION */
+.result-data-area {
+  margin: 1em;
+  width: 50vw;
+  height: 100%;
+  border: solid black;
+  border-radius: 7px;
+  background-color:rgb(131, 126, 126);
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.4s;
+}
+
+.result-data-area[disabled]{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50%;
+  transition: all 0.4s;
+}
+
+.result-table-area {
+  overflow-y: scroll;
+  height: 80%;
+  width: 100%;
+  border: 3px solid black;
+}
+
+.result-label{
+  font-size: 1.5em;
+  text-align: center;
+  padding: 1em;
+  background-color: #282c34;
+  color: white;
+}
+
+.result-table {
+  border: 1px solid black;
+  color: #FFFFFF;
+  width: 100%;
+}
+
+table, th, td {
+  border:1px solid black;
 }

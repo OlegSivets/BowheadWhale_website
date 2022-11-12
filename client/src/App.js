@@ -5,14 +5,20 @@ import HeaderArea from './components/Areas/header/HeaderArea';
 import UploadedFilesArea from './components/Areas/UploadedFilesArea';
 import UploadLabelArea from './components/Areas/UploadLabelArea';
 import UploadManageArea from './components/Areas/UploadManageArea';
+import ResultDataArea from './components/Areas/ResultDataArea';
 
 function App() {
   return (
     <MainContextProvider>
       <HeaderArea />
-      <UploadManageArea />
-      <DragArea />
-      <UploadLabelArea />
+      <div className='data-mage-area'>
+        <div className='files-control-area'>
+          <UploadManageArea />
+          <DragArea />
+          <UploadLabelArea />
+        </div>
+        <ResultDataArea />
+      </div>
       <UploadedFilesArea />
     </MainContextProvider>
   );

@@ -57,7 +57,7 @@ def get_client_files():
 @app.route('/result')
 def get_result_csv():
     print(f"RESULT_PATH, {os.path.join(app.config['RESULT_FOLDER'], 'result.csv')}")
-    return send_file(os.path.join(app.config['RESULT_FOLDER'], 'result.csv'), mimetype='text/csv',)
+    return send_file(os.path.join(app.config['RESULT_FOLDER'], 'result_test.csv'), mimetype='text/csv',)
 
 
 if __name__ == '__main__':

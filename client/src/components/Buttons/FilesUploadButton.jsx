@@ -11,16 +11,11 @@ export default function FilesUploadButton() {
   }
 
   return (
-    <div className='upload-buttons-area'>
       <div className='upload-button'>
-        <label htmlFor="file-upload"><span>Загрузить файлы</span></label>
+        <label htmlFor="file-upload">Выбрать файлы</label>
         <input id='file-upload' type='file' accept=".jpg, .jpeg, .png, .zip" multiple onChange={e => handleInputChange(e)} />
       </div>
-      <div className='upload-button'>
-        <label htmlFor="file-upload-directory">Выбрать папку</label>
-        <input id='file-upload-directory' directory="" webkitdirectory="" type="file" onChange={e => handleInputChange(e)}/>
-      </div>
-      <DataSendButton/>
-    </div>
   )
 }
+
+// className='upload-buttons-area'

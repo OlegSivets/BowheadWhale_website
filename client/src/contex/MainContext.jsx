@@ -60,6 +60,7 @@ const MainContextProvider = ({ children }) => {
         .then(responseText => {
           let data = Papa.parse(responseText)
           setResultData(data)
+          console.log('RESULT_DATA: ', data)
         })
 
       setUpdateStatus(true)
