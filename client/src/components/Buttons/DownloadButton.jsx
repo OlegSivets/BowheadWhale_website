@@ -8,7 +8,7 @@ export default function DownloadButton() {
   return (
     <>
       <button className='download-button' 
-      onClick={downloadFiles} disabled={resultState ? "" : "disabled"}><span>Скачать файлы</span></button>
+      onClick={downloadFiles} disabled={resultState ? "" : "disabled"}><span>Скачать файл</span></button>
     </>
   )
 }

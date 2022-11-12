@@ -8,14 +8,6 @@ export default function ResultTable() {
   return (
     <div className='result-table-area'>
         <table className='result-table'>
-            <tr>
-                <th>Папка</th>
-                <th>Топ_1</th>
-                <th>Топ_2</th>
-                <th>Топ_3</th>
-                <th>Топ_4</th>
-                <th>Топ_5</th>
-            </tr>
             {resultData &&
                 resultData.data.map((row, index) => 
                 <tr key={index}>
