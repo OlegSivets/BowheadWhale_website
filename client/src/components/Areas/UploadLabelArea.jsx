@@ -8,14 +8,11 @@ export default function UploadLabelArea() {
   
   return (
     <div className='upload-control-area'>
-        { !resultState ? 
-            updateStatus ? 
+            {updateStatus ? 
                 uploadedFiles.length > 0 ? 
                 <div>Загруженные фото: {uploadedFiles.length}шт.</div> :
                 <div>Загрузите фото</div>: 
-                <div>Упорно ищем китов...</div>:
-            <div>Результат поиска</div>
-        }
+                <div>Упорно ищем китов...</div>}
       <HideFilesSwitch/>
     </div>
   )

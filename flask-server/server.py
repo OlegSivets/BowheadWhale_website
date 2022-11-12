@@ -25,7 +25,7 @@ def process():
     for i in os.listdir(app.config['UPLOAD_FOLDER']):
         src = os.path.join(app.config['UPLOAD_FOLDER'], i)
         dst = os.path.join(app.config['RESULT_FOLDER'], i)
-        shutil.copy(src, dst)
+        # shutil.copy(src, dst)
 
 
 @app.route('/<name>')
@@ -49,8 +49,15 @@ def get_client_files():
                 patoolib.extract_archive(path, outdir=app.config['UPLOAD_FOLDER'])
                 os.remove(path)
     process()
-    res = make_response(jsonify(os.listdir(app.config['RESULT_FOLDER'])[1:]), 200)
+    # res = make_response(jsonify(os.listdir(app.config['UPLOAD_FOLDER'])[1:]), 200)
+    res = (['Files were received:'], 200)
     return res
+
+
+@app.route('/result')
+def get_result_csv():
+    print(f"RESULT_PATH, {os.path.join(app.config['RESULT_FOLDER'], 'result.csv')}")
+    return send_file(os.path.join(app.config['RESULT_FOLDER'], 'result.csv'), mimetype='text/csv',)
 
 
 if __name__ == '__main__':

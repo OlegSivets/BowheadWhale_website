@@ -10,8 +10,7 @@ export default function ImageDeleteButton({file}) {
 
   return (
     <div>
-      {resultState ? <></>:
-        <button onClick={handleButtonClick} className='close'></button>}
+        <button onClick={handleButtonClick} className='close'></button>
     </div> 
   )
 }

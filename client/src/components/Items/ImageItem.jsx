@@ -10,13 +10,9 @@ export default function ImageItem({file}) {
     <div className='image-box'>
       <ImageDeleteButton file={file}/>
       { file['type'] != "application/x-zip-compressed" ?
-        resultState ? 
-          <div className='text-box'>
-            <img src={URL.createObjectURL(file)}/>
-          </div>:
           <a className='text-box' href={URL.createObjectURL(file)}>
             <img src={URL.createObjectURL(file)}/>
-          </a>: 
+          </a>:
         <div className='text-box'>
           <p className='img-error-label'>{file['name']}</p>
         </div>
