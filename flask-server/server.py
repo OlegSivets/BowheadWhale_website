@@ -54,10 +54,10 @@ def clear():
 def process():
     """Обработка изображений нейросетью"""
     reorganize()
-    device = torch.device('cpu' if torch.cuda.is_available() else 'gpu')
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     
     model = ft_net(102)
-    model.load_state_dict(torch.load('model/ft_ResNet50/net_last.pth'))
+    model.load_state_dict(torch.load('model/ft_ResNet50/net_64.1.pth'))
 
     model = model.to(device) # Set model to gpu
 
@@ -81,7 +81,7 @@ def process():
                     img = img.rotate(90, expand=True)
                 img_preproc = data_transforms(img)
                 inputs = torch.unsqueeze(img_preproc, 0)
-                pred = model(inputs)
+                pred = model(inputs.to(device))
                 pred = pred.detach().cpu().numpy()
                 predictions.append(np.argmax(pred) + 1)
                 if not os.path.exists(os.path.join(app.config['RESULT_FOLDER'], str(np.argmax(pred) + 1))):
