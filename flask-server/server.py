@@ -44,9 +44,9 @@ def clear():
         elif i == 'res.csv': os.remove(os.path.join(app.config['UPLOAD_FOLDER'], i))
         else: shutil.rmtree(os.path.join(app.config['UPLOAD_FOLDER'], i))
     for i in os.listdir(app.config['RESULT_FOLDER'])[1:]:
-        if i == '.gitkeep': continue
-        elif i == 'result.csv': os.remove(os.path.join(app.config['UPLOAD_FOLDER'], i))
-        else: shutil.rmtree(os.path.join(app.config['UPLOAD_FOLDER'], i))
+        print(i)
+        if i == '.gitkeep' or i == 'result.zip' or i == 'result.csv': continue
+        else: shutil.rmtree(os.path.join(app.config['RESULT_FOLDER'], i))
 
 
 def process():
@@ -82,9 +82,9 @@ def process():
                 pred = model(inputs)
                 pred = pred.detach().cpu().numpy()
                 predictions.append(np.argmax(pred) + 1)
-                if not os.path.exists(os.path.join(dir, str(np.argmax(pred) + 1))):
-                    os.mkdir(os.path.join(dir, str(np.argmax(pred) + 1)))
-                shutil.copy(os.path.join(dir, fileq), os.path.join(app.config['UPLOAD_FOLDER'], str(np.argmax(pred) + 1), fileq))
+                if not os.path.exists(os.path.join(app.config['RESULT_FOLDER'], str(np.argmax(pred) + 1))):
+                    os.mkdir(os.path.join(app.config['RESULT_FOLDER'], str(np.argmax(pred) + 1)))
+                shutil.copy(os.path.join(dir, fileq), os.path.join(app.config['RESULT_FOLDER'], str(np.argmax(pred) + 1), fileq))
             unique, counts = np.unique(np.array(predictions), return_counts=True)
             if len(unique):
                 st = [dir.split('\\')[-1]]
