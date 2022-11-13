@@ -17,11 +17,13 @@ from PIL import Image
 
 UPLOAD_FOLDER = './uploaded'
 RESULT_FOLDER = './result'
+ARCHIVE_FOLDER = './archive'
 ALLOWED_EXTENSIONS = set(['jp2', 'raw', 'png', 'jpg', 'jpeg', 'zip', 'rar', 'gz', '7z'])
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['RESULT_FOLDER'] = RESULT_FOLDER
+app.config['ARCHIVE_FOLDER'] = ARCHIVE_FOLDER
 
 
 def allowed_file(filename):
@@ -96,14 +98,14 @@ def process():
     df.to_csv(os.path.join(app.config['UPLOAD_FOLDER'], 'res.csv'), index=False, sep=';')
     shutil.copy(os.path.join(app.config['UPLOAD_FOLDER'], 'res.csv'), os.path.join(app.config['RESULT_FOLDER'], 'result.csv'))
     
-    shutil.make_archive(os.path.join(app.config['RESULT_FOLDER'], 'result'), 'zip', os.path.join(app.config['RESULT_FOLDER']))
+    shutil.make_archive(os.path.join(app.config['RESULT_FOLDER'], 'result'), 'zip', os.path.join(app.config['ARCHIVE_FOLDER']))
     clear()
 
 
 @app.route('/zip')
-def result_images(name):
+def result_images():
     """Возврат обработанных изображений клиенту"""
-    return send_file(os.path.join(app.config['RESULT_FOLDER'], name))
+    return send_file(os.path.join(app.config['ARCHIVE_FOLDER'], 'result.zip'))
 
 
 @app.route('/files', methods=['POST'])
