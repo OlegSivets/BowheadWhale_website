@@ -43,6 +43,10 @@ def clear():
         if i == '.gitkeep': continue
         elif i == 'res.csv': os.remove(os.path.join(app.config['UPLOAD_FOLDER'], i))
         else: shutil.rmtree(os.path.join(app.config['UPLOAD_FOLDER'], i))
+    for i in os.listdir(app.config['RESULT_FOLDER'])[1:]:
+        if i == '.gitkeep': continue
+        elif i == 'result.csv': os.remove(os.path.join(app.config['UPLOAD_FOLDER'], i))
+        else: shutil.rmtree(os.path.join(app.config['UPLOAD_FOLDER'], i))
 
 
 def process():
@@ -51,7 +55,7 @@ def process():
     device = torch.device('cpu' if torch.cuda.is_available() else 'gpu')
     
     model = ft_net(102)
-    model.load_state_dict(torch.load('model/ft_ResNet50/net_62.8.pth'))
+    model.load_state_dict(torch.load('model/ft_ResNet50/net_last.pth'))
 
     model = model.to(device) # Set model to gpu
 
@@ -78,20 +82,25 @@ def process():
                 pred = model(inputs)
                 pred = pred.detach().cpu().numpy()
                 predictions.append(np.argmax(pred) + 1)
+                if not os.path.exists(os.path.join(dir, str(np.argmax(pred) + 1))):
+                    os.mkdir(os.path.join(dir, str(np.argmax(pred) + 1)))
+                    shutil.copy(os.path.join(dir, fileq), os.path.join(dir, str(np.argmax(pred) + 1), fileq))
             unique, counts = np.unique(np.array(predictions), return_counts=True)
             if len(unique):
                 st = [dir.split('\\')[-1]]
                 st.extend(np.array(sorted(np.asarray((unique, counts)).T, key=lambda x: x[-1], reverse=True))[:5, 0])
+                while len(st) < 6: st.append(-1)
                 res.append(st)
 
     df = pd.DataFrame(res, columns=['name','top1','top2','top3','top4','top5'])
     df.to_csv(os.path.join(app.config['UPLOAD_FOLDER'], 'res.csv'), index=False, sep=';')
     shutil.copy(os.path.join(app.config['UPLOAD_FOLDER'], 'res.csv'), os.path.join(app.config['RESULT_FOLDER'], 'result.csv'))
     
+    shutil.make_archive(os.path.join(app.config['RESULT_FOLDER'], 'result'), 'zip', os.path.join(app.config['RESULT_FOLDER']))
     clear()
 
 
-@app.route('/<name>')
+@app.route('/zip')
 def result_images(name):
     """Возврат обработанных изображений клиенту"""
     return send_file(os.path.join(app.config['RESULT_FOLDER'], name))
