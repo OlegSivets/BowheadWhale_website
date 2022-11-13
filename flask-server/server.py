@@ -1,8 +1,18 @@
 import os
 import patoolib
 import shutil
+import os
+import torch
+import numpy as np
+import pandas as pd
+
 from werkzeug.utils import secure_filename
 from flask import Flask, request, make_response, jsonify, send_file
+
+from model import ft_net
+from torchvision import transforms
+from PIL import Image
+
 
 
 UPLOAD_FOLDER = './uploaded'
@@ -19,13 +29,66 @@ def allowed_file(filename):
     ext = filename.rsplit('.', 1)[1]
     return ext if '.' in filename and ext in ALLOWED_EXTENSIONS else False
 
+def reorganize():
+    """Проверка допустимых типов загружаемых файлов"""
+    for i in os.listdir(app.config['UPLOAD_FOLDER'])[1:]:
+        folder = i.split('_')[1]
+        if not os.path.exists(os.path.join(app.config['UPLOAD_FOLDER'], folder)):
+            os.mkdir(os.path.join(app.config['UPLOAD_FOLDER'], folder))
+        shutil.move(os.path.join(app.config['UPLOAD_FOLDER'], i), os.path.join(app.config['UPLOAD_FOLDER'], folder))
+
+
+def clear():
+    for i in os.listdir(app.config['UPLOAD_FOLDER'])[1:]:
+        if i == '.gitkeep': continue
+        elif i == 'res.csv': os.remove(os.path.join(app.config['UPLOAD_FOLDER'], i))
+        else: shutil.rmtree(os.path.join(app.config['UPLOAD_FOLDER'], i))
+
 
 def process():
     """Обработка изображений нейросетью"""
-    for i in os.listdir(app.config['UPLOAD_FOLDER']):
-        src = os.path.join(app.config['UPLOAD_FOLDER'], i)
-        dst = os.path.join(app.config['RESULT_FOLDER'], i)
-        # shutil.copy(src, dst)
+    reorganize()
+    device = torch.device('cpu' if torch.cuda.is_available() else 'gpu')
+    
+    model = ft_net(102)
+    model.load_state_dict(torch.load('model/ft_ResNet50/net_62.8.pth'))
+
+    model = model.to(device) # Set model to gpu
+
+
+    data_transforms = transforms.Compose([
+            transforms.Resize((256,128), interpolation=3),
+            transforms.ToTensor(),
+            transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]) 
+        ])
+
+
+    res = []
+    model.eval()
+    with torch.no_grad():
+        for dir, fold, files in os.walk(app.config['UPLOAD_FOLDER']):
+            predictions = []
+            if files[0] == '.gitkeep': continue
+            for fileq in files:
+                img = Image.open(os.path.join(dir, fileq)).convert('RGB')
+                if img.width < img.height: 
+                    img = img.rotate(90, expand=True)
+                img_preproc = data_transforms(img)
+                inputs = torch.unsqueeze(img_preproc, 0)
+                pred = model(inputs)
+                pred = pred.detach().cpu().numpy()
+                predictions.append(np.argmax(pred) + 1)
+            unique, counts = np.unique(np.array(predictions), return_counts=True)
+            if len(unique):
+                st = [dir.split('\\')[-1]]
+                st.extend(np.array(sorted(np.asarray((unique, counts)).T, key=lambda x: x[-1], reverse=True))[:5, 0])
+                res.append(st)
+
+    df = pd.DataFrame(res, columns=['name','top1','top2','top3','top4','top5'])
+    df.to_csv(os.path.join(app.config['UPLOAD_FOLDER'], 'res.csv'), index=False, sep=';')
+    shutil.copy(os.path.join(app.config['UPLOAD_FOLDER'], 'res.csv'), os.path.join(app.config['RESULT_FOLDER'], 'result.csv'))
+    
+    clear()
 
 
 @app.route('/<name>')
@@ -56,8 +119,7 @@ def get_client_files():
 
 @app.route('/result')
 def get_result_csv():
-    print(f"RESULT_PATH, {os.path.join(app.config['RESULT_FOLDER'], 'result.csv')}")
-    return send_file(os.path.join(app.config['RESULT_FOLDER'], 'result_test.csv'), mimetype='text/csv',)
+    return send_file(os.path.join(app.config['RESULT_FOLDER'], 'result.csv'), mimetype='text/csv',)
 
 
 if __name__ == '__main__':
