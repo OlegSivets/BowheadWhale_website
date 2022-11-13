@@ -98,7 +98,7 @@ def process():
     df.to_csv(os.path.join(app.config['UPLOAD_FOLDER'], 'res.csv'), index=False, sep=';')
     shutil.copy(os.path.join(app.config['UPLOAD_FOLDER'], 'res.csv'), os.path.join(app.config['RESULT_FOLDER'], 'result.csv'))
     
-    shutil.make_archive(os.path.join(app.config['RESULT_FOLDER'], 'result'), 'zip', os.path.join(app.config['ARCHIVE_FOLDER']))
+    shutil.make_archive(os.path.join(app.config['ARCHIVE_FOLDER'], 'result'), 'zip', app.config['UPLOAD_FOLDER'])
     clear()
 
 
